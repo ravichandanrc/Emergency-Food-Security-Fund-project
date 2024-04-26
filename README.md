@@ -2,15 +2,6 @@
 
 ### Introduction
 
-One of the most popular and commonly used file formats is Portable Document Format, or
-PDF, which has the capability to store a plethora of crucial information for organizations,
-businesses, and institutions. In today's rapidly evolving digital economy, PDFs are becoming
-a sustainable alternative to paper, allowing users to share, print, and view files across different
-platforms. Despite their reliability for storing and formatting data, it remains challenging to
-scrape, parse, and extract data from PDF files as they are versatile. In our project, we are
-dealing with semi-structured data that doesn't transform accurately into columns or rows, due
-to the nature of the pdf data files.
-
 This project aims to analyze the Emergency Food Security Fund (EFSF) data made available
 during the pandemic by the Canadian Federal Government. The EFSF was announced in 2020
 to aid local food organizations with nearly $100 million in funds to deal with the food crisis
@@ -20,19 +11,19 @@ Agriculture and Agri-Food Canada partnered with 6 national organizations namely 
 Army, Breakfast Club of Canada, Second Harvest, la Tablee des Chefs, Community Food
 Centres Canada and Food Banks Canada. These organizations funded a total of 3038 projects
 including the purchase of fridges, food storage units, and delivery services partnering with community
-centers, local churches, food banks and other charitable organizations. 20% of local partners
+centers, local churches, food banks, and other charitable organizations. 20% of local partners
 were also surveyed to understand the perspective of the underlying organization. The shared
 information was analyzed to create performance reports and program results to report
 to the Parliament.
 
 The key objective of the project is to extract these valuable data points from the available
 unstructured PDFs and give the researchers at the University of Toronto, the required data in an
-efficient and reliable manner into Comma separated values (CSV) spreadsheets.
+efficient and reliable manner into comma-separated values (CSV) spreadsheets.
 
 ### Model Development
 
 To parse the PDFs, we use open-source OCR (Optical Character Recognition) engines and
-Python as the programming language of choice. After exhaustive testing, optimal OCR engines
+Python is the programming language of choice. After exhaustive testing, optimal OCR engines
 were determined as EasyOCR and Tesseract with OpenCV aiding for image processing
 techniques. The other packages that were considered were PaddleOCR, pyPD2, PDFQuery,
 Excalibur and PDFminer were not able to parse the text due to the nature of the data file as
@@ -55,7 +46,7 @@ library was used to enhance the quality of the individual images by pre-processi
 grayscale, and all images were normalized to a constant aspect ratio.
 
 The widths of the column headers remained the same across each segment and were computed for
-extraction. The heights, however, varied as the number of data records vary across each page. The
+extraction. The heights, however, varied as the number of data records varied across each page. The
 varying heights are computed by taking the height of the first row and the difference in height
 between each row until it reaches the end of the page. While Pytesseract was used to get the data
 from the image and convert it to an editable text format, EasyOCR was found to be the best tool
@@ -67,7 +58,12 @@ further analysis.
 The final output after parsing all the raw text is stored in an array using high-performance
 cloud computing resources. A CSV writeback of the array is performed to store the information
 into spreadsheets that allow the researchers to use the data immediately using MS Excel without
-the need of installing any external tools or setting up databases. The spreadsheets are
+the need to install any external tools or set up databases. The spreadsheets are
 uploaded to perform text mining operations, exploratory data analysis, descriptive analysis,
 and sentiment analysis to gain data-driven insights for the researchers. There are a total of
 10488 records in File A and 3513 records in File B that were extracted.
+
+### Analysis
+- The extracted data was visualized using Oracle Data Visualization and a new column called funding efficiency was created which was NumberPeopleServed/ApprovedFunding_AAFC.
+- Wordcloud using Python programming language to highlight the key words used in the PDFs, the largest and most prominent words in the cloud are “youth”,”women”,”seniors” and ”income” which reflects how funds are distributed.
+- Vader-based Sentiment Analysis of feedback form with English and French text to understand the opinion of Leads for the Emergency Fund Security Project.
